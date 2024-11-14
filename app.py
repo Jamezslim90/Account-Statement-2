@@ -98,7 +98,7 @@ def process_statements():
         ]
         pdf_file = generate_pdf(account, filtered_transactions)
         send_email(account, pdf_file)
-        os.remove(pdf_file)  # Clean up the PDF file
+        os.remove(pdf_file)  # Clean up the PDF files 
 
 if __name__ == "__main__":
     process_statements()
