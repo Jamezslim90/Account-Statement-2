@@ -7,9 +7,9 @@ import random
 # Mock data for customer accounts and transactions
 MOCK_CUSTOMER_DATA = [
     {
-        "account_holder": "John Doe",
-        "account_number": "123456789",
-        "email": "john.doe@example.com",
+        "account_holder": "James Inaz",
+        "account_number": "1234567890",
+        "email": "iamsundayjames@gmail.com",
         "transactions": [
             {
                 "date": (datetime.now() - timedelta(days=i)).strftime("%Y-%m-%d"),
@@ -104,6 +104,10 @@ def send_email(account, pdf_file):
 
 # Main processing function
 def process_statements():
+    
+    # Make API Calls to retrieve Account details
+    # Loop through each data
+
     for account in MOCK_CUSTOMER_DATA:
         # Filter transactions for the last 30 days
         filtered_transactions = [

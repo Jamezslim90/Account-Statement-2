@@ -1,4 +1,4 @@
-import smtplib
+import smtplib, ssl
 from email.message import EmailMessage
 from datetime import datetime, timedelta
 from fpdf import FPDF
@@ -7,19 +7,19 @@ import os
 import random
 
 # Email configuration
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = "smtp.office365.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "jamezslim90@gmail.com"       # Your Gmail address
-EMAIL_HOST_PASSWORD = "boiyhaxzidarokpp"        # Your Gmail App Password (use App Passwords, not your main password)
+EMAIL_HOST_USER = "jamezslim90@gmail.com"       
+EMAIL_HOST_PASSWORD = "boiyhaxzidarokpp"       
 DEFAULT_FROM_EMAIL = "TajBank <statement@gmail.com>"
 
 # Mock data for customer accounts and transactions
 MOCK_CUSTOMER_DATA = [
     {
-        "account_holder": "John Doe",
-        "account_number": "123456789",
-        "email": "john.doe@example.com",
+        "account_holder": "James Inaz",
+        "account_number": "1234567890",
+        "email": "iamsundayjames@gmail.com",
         "transactions": [
             {
                 "date": (datetime.now() - timedelta(days=i)).strftime("%Y-%m-%d"),
@@ -33,9 +33,9 @@ MOCK_CUSTOMER_DATA = [
         ]
     },
     {
-        "account_holder": "Jane Smith",
-        "account_number": "987654321",
-        "email": "jane.smith@example.com",
+        "account_holder": "Abdul Umar",
+        "account_number": "9876543210",
+        "email": "james.inalegwu@tajbank.com",
         "transactions": [
             {
                 "date": (datetime.now() - timedelta(days=i)).strftime("%Y-%m-%d"),
@@ -197,12 +197,15 @@ def send_email(account, pdf_file):
     # Send email via Gmail SMTP
     try:
         with smtplib.SMTP(EMAIL_HOST, EMAIL_PORT) as server:
+            server.ehlo()
             server.starttls()  # Secure the connection
             server.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD)
             server.send_message(msg)
             print(f"Email sent to {account['email']}")
+
     except Exception as e:
         print(f"Failed to send email to {account['email']}: {e}")
+
 
 # Main processing function
 def process_statements():
